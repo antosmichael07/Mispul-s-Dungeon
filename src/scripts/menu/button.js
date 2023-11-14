@@ -12,23 +12,29 @@ class Button {
         this.hover_img_src = hover_img_src
         this.click_img_src = click_img_src
         this.already_clicked = false
+        this.hovering_over = false
     }
     draw() {
         if (input.mouse.x < this.x || input.mouse.y < this.y || input.mouse.x > this.x + this.w || input.mouse.y > this.y + this.h) {
             c.drawImage(this.static_img, this.x, this.y, this.w, this.h)
-        } else if (input.mouse.clicked_button == false) {
+            this.hovering_over = false
+        } else if (!input.mouse.clicked_button || input.mouse.button != 0) {
             c.drawImage(this.hover_img, this.x, this.y, this.w, this.h)
-        } else {
+            this.hovering_over = true
+        } else if (this.hovering_over) {
             c.drawImage(this.click_img, this.x, this.y, this.w, this.h)
+        } else {
+            c.drawImage(this.hover_img, this.x, this.y, this.w, this.h)
         }
     }
     click_handler() {
-        if (input.mouse.clicked_button == false && this.already_clicked == true) {
+        if (!input.mouse.clicked_button && this.already_clicked) {
             this.already_clicked = false
         }
-
-        if (this.already_clicked == false && input.mouse.clicked_button == true && input.mouse.button == 0 && input.mouse.x >= this.x && input.mouse.y >= this.y && input.mouse.x <= this.x + this.w && input.mouse.y <= this.y + this.h) {
+        if (!this.already_clicked && input.mouse.clicked_button && input.mouse.button == 0 && input.mouse.x >= this.x && input.mouse.y >= this.y && input.mouse.x <= this.x + this.w && input.mouse.y <= this.y + this.h) {
             this.click_event()
+        }
+        if (input.mouse.clicked_button) {
             this.already_clicked = true
         }
     }

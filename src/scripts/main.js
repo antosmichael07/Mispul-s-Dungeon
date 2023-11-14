@@ -11,6 +11,10 @@ function main() {
         drawMenu()
     }
 
+    c.fillStyle = "#FFFFFF"
+    c.fillRect(0, 0, 1920, 1)
+    c.fillRect(0, 1079, 1920, 1)
+
     setTimeout(main, 1000 / 60)
 }
 

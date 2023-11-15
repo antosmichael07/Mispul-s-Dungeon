@@ -12,6 +12,7 @@ class Button {
         this.hover_img_src = hover_img_src
         this.click_img_src = click_img_src
         this.already_clicked = false
+        this.clicked_last_frame = false
         this.hovering_over = false
     }
     draw() {
@@ -32,7 +33,13 @@ class Button {
             this.already_clicked = false
         }
         if (!this.already_clicked && input.mouse.clicked_button && input.mouse.button == 0 && input.mouse.x >= this.x && input.mouse.y >= this.y && input.mouse.x <= this.x + this.w && input.mouse.y <= this.y + this.h) {
+            this.clicked_last_frame = true
+        } else if (this.clicked_last_frame && !this.already_clicked && !input.mouse.clicked_button && input.mouse.button == 0 && input.mouse.x >= this.x && input.mouse.y >= this.y && input.mouse.x <= this.x + this.w && input.mouse.y <= this.y + this.h) {
             this.click_event()
+            this.clicked_last_frame = false
+        }
+        if (input.mouse.x < this.x || input.mouse.y < this.y || input.mouse.x > this.x + this.w || input.mouse.y > this.y + this.h) {
+            this.clicked_last_frame = false
         }
         if (input.mouse.clicked_button) {
             this.already_clicked = true

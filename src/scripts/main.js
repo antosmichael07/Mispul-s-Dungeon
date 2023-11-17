@@ -1,7 +1,7 @@
 const canvas = document.getElementById("canvas")
 const c = canvas.getContext("2d")
 
-var scene = "menu/"
+var scene = "menu"
 
 function main() {
     c.fillStyle = "#202020"
@@ -10,6 +10,7 @@ function main() {
     if (scene.split("/")[0] == "menu") {
         drawMenu()
     }
+    buttons_show()
 
     c.fillStyle = "#FFFFFF"
     c.fillRect(0, 0, 1920, 1)

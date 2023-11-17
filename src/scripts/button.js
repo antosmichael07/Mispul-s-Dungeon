@@ -55,3 +55,33 @@ class Button {
         this.click_img.src = this.click_img_src
     }
 }
+
+var buttons = {}
+
+function buttons_show() {
+    var temp_splited_scene = scene.split("/")
+    var temp_scene = ""
+    for (var i = 0; i < temp_splited_scene.length; i++) {
+        if (i == temp_splited_scene.length - 1) {
+            temp_scene += temp_splited_scene[i]
+            break
+        }
+        temp_scene += temp_splited_scene[i] + "/"
+    }
+    buttons[temp_scene].forEach(button => {
+        button.draw()
+        button.click_handler()
+    });
+}
+
+var back_button = function () {
+    var temp_scene = scene.split("/")
+    scene = ""
+    for (var i = 0; i < temp_scene.length - 1; i++) {
+        if (i == temp_scene.length - 2) {
+            scene += temp_scene[i]
+            break
+        }
+        scene += temp_scene[i] + "/"
+    }
+}

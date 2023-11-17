@@ -1,3 +1,5 @@
+var menu_buttons = []
+
 function drawMenu() {
     if (scene.split("/")[1] == "") {
         menu_buttons.forEach(button => {

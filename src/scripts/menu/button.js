@@ -55,5 +55,3 @@ class Button {
         this.click_img.src = this.click_img_src
     }
 }
-
-var menu_buttons = []

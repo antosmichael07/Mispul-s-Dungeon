@@ -7,7 +7,9 @@ function main() {
     c.fillStyle = "#202020"
     c.fillRect(0, 0, 1920, 1080)
 
-    if (scene.split("/")[0] == "menu") {
+    if (scene == "game") {
+        game()
+    } else if (scene == "menu") {
         drawMenu()
     }
     buttons_show()

@@ -4,7 +4,8 @@ var input = {
         y: 0,
         clicked_button: 0,
         button: 0
-    }
+    },
+    keyboard: {}
 }
 
 document.addEventListener('mousemove', function(e) {
@@ -21,4 +22,12 @@ document.addEventListener('mousedown', function(e) {
 
 document.addEventListener('mouseup', function(e) {
     input.mouse.clicked_button = false
+})
+
+document.addEventListener('keydown', function(e) {
+    input.keyboard[e.key] = true
+})
+
+document.addEventListener('keyup', function(e) {
+    input.keyboard[e.key] = false
 })

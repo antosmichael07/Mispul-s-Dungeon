@@ -68,10 +68,12 @@ function buttons_show() {
         }
         temp_scene += temp_splited_scene[i] + "/"
     }
-    buttons[temp_scene].forEach(button => {
-        button.draw()
-        button.click_handler()
-    });
+    if (buttons[temp_scene] != undefined) {
+        buttons[temp_scene].forEach(button => {
+            button.draw()
+            button.click_handler()
+        });
+    }
 }
 
 var back_button = function () {

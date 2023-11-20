@@ -1,5 +1,8 @@
 class Player extends Collision_object {
-    registerInput() {
+    constructor(x, y, w, h) {
+        super(x, y, w, h, "player", 5, "green")
+    }
+    register_input() {
         if (input.keyboard.w) {
             this.direction = "w" + this.direction[1]
         } else if (this.direction[0] == "w") {
@@ -23,17 +26,9 @@ class Player extends Collision_object {
     }
 }
 
-function getPlayer() {
-    for (var i = 0; i < collision_objects.length; i++) {
-        if (collision_objects[i].id == "player") {
-            return i
-        }
-    }
-}
-
-collision_objects.push(new Player(100, 100, 100, 100, "player", 5, "red"))
-var playerIndex = getPlayer()
+collision_objects.push(new Player(100, 100, 100, 100))
+var playerIndex = collision_objects.length - 1
 
 function player() {
-    collision_objects[playerIndex].registerInput()
+    collision_objects[playerIndex].register_input()
 }

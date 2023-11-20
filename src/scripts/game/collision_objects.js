@@ -1,17 +1,24 @@
 var collision_objects = []
 
 class Collision_object {
-    constructor(x, y, w, h, id, speed, color) {
+    constructor(x, y, w, h, id, speed, color = "purple") {
         this.x = x
         this.y = y
         this.w = w
         this.h = h
         this.id = id
         this.speed = speed
-        this.color = color
+        this.straight_speed = speed
+        this.diagonal_speed = Math.round(speed / 1.41421356237)
         this.direction = "00"
+        this.color = color
     }
     move() {
+        if (this.direction[0] != "0" && this.direction[1] != "0") {
+            this.speed = this.diagonal_speed
+        } else {
+            this.speed = this.straight_speed
+        }
         if (this.direction[0] == "w") {
             var collision_object_in_way_y = "false"
             for (var i = 0; i < collision_objects.length; i++) {
@@ -27,7 +34,7 @@ class Collision_object {
                     &&
                     (
                         (this.y > collision_objects[i].y && this.y - this.speed < collision_objects[i].y) ||
-                        (this.y > collision_objects[i].y + collision_objects[i].h - 1 && this.y - this.speed < collision_objects[i].y + collision_objects[i].h - 1)
+                        (this.y > collision_objects[i].y + collision_objects[i].h - 1 && this.y - this.speed < collision_objects[i].y + collision_objects[i].h)
                     )
                 ) {
                     if (collision_objects[i].y + collision_objects[i].h > collision_object_in_way_y) {
@@ -56,8 +63,8 @@ class Collision_object {
                     )
                     &&
                     (
-                        (this.y + this.h - 1 < collision_objects[i].y && this.y + this.h - 1 + this.speed > collision_objects[i].y) ||
-                        (this.y + this.h < collision_objects[i].y + collision_objects[i].h - 1 && this.y + this.h + this.speed > collision_objects[i].y + collision_objects[i].h - 1)
+                        (this.y + this.h - 1 < collision_objects[i].y && this.y + this.h + this.speed > collision_objects[i].y) ||
+                        (this.y + this.h < collision_objects[i].y + collision_objects[i].h - 1 && this.y + this.h + this.speed > collision_objects[i].y + collision_objects[i].h)
                     )
                 ) {
                     if (collision_objects[i].y < collision_object_in_way_y) {
@@ -88,7 +95,7 @@ class Collision_object {
                     &&
                     (
                         (this.x > collision_objects[i].x && this.x - this.speed < collision_objects[i].x) ||
-                        (this.x > collision_objects[i].x + collision_objects[i].w - 1 && this.x - this.speed < collision_objects[i].x + collision_objects[i].w - 1)
+                        (this.x > collision_objects[i].x + collision_objects[i].w - 1 && this.x - this.speed < collision_objects[i].x + collision_objects[i].w)
                     )
                 ) {
                     if (collision_objects[i].x + collision_objects[i].w > collision_object_in_way_x) {
@@ -117,8 +124,8 @@ class Collision_object {
                     )
                     &&
                     (
-                        (this.x + this.w - 1 < collision_objects[i].x && this.x + this.w - 1 + this.speed > collision_objects[i].x) ||
-                        (this.x + this.w < collision_objects[i].x + collision_objects[i].w - 1 && this.x + this.w + this.speed > collision_objects[i].x + collision_objects[i].w - 1)
+                        (this.x + this.w - 1 < collision_objects[i].x && this.x + this.w + this.speed > collision_objects[i].x) ||
+                        (this.x + this.w < collision_objects[i].x + collision_objects[i].w - 1 && this.x + this.w + this.speed > collision_objects[i].x + collision_objects[i].w)
                     )
                 ) {
                     if (collision_objects[i].x < collision_object_in_way_x) {
@@ -135,7 +142,7 @@ class Collision_object {
             }
         }
     }
-    draw() {
+    draw_hitbox() {
         c.fillStyle = this.color
         c.fillRect(this.x, this.y, this.w, this.h)
     }

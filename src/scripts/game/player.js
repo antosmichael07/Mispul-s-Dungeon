@@ -1,6 +1,6 @@
 class Player extends Collision_object {
     constructor(x, y, w, h) {
-        super(x, y, w, h, "player", 5, "green")
+        super(x, y, w, h, "player", 3, "green")
     }
     register_input() {
         if (input.keyboard.w) {
